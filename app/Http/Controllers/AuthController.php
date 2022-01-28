@@ -50,7 +50,7 @@ class AuthController extends Controller
                 'scope' => '*',
             ];
             $request->request->add($params);
-            $proxy = Request::create('oauth/token', 'POST');
+            $proxy = Request::create('/oauth/token', 'POST');
             return Route::dispatch($proxy);
         }
         else {

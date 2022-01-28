@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
             $check_message = $exception->getMessage();
             if(!empty($check_message)){
                 $message = $exception->getMessage();
-                return $this->errorMessage($message, $code);
+                return $this->errorResponse($message, $code);
             }
             else
                 $message = Response::$statusTexts[$code];
