@@ -2,6 +2,7 @@
 namespace App\Traits;
 
 use App\Events\AchievementUnlocked;
+use App\Events\BadgeUnlocked;
 use App\Models\Badge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,7 @@ trait BadgeTrait {
                     'badge_id' => $badge->id,
                     'user_id' => $user->id
                 ]);
+                BadgeUnlocked::dispatch($badge->name, $user);
             }
         }
         $user_achievement = $user->achievements;
@@ -32,6 +34,7 @@ trait BadgeTrait {
                 'badge_id' => $badge->id,
                 'user_id' => $user->id
             ]);
+            BadgeUnlocked::dispatch($badge->name, $user);
         }
     }
 }
