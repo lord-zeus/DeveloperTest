@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Events\AchievementUnlocked;
 use App\Models\Badge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ trait BadgeTrait {
             'user_id' => $user->id,
             'achievement_id' => $achievement->id
         ]);
+        AchievementUnlocked::dispatch($achievement->name, $user);
         $badges = $user->badges;
         if(count($badges) == 0){
             $badge = Badge::where('number_achievements', 0)->first();
