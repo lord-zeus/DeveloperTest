@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Models\Achievement;
 use App\Models\Badge;
+use App\Traits\AchievementTrait;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Events\CommentWritten;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class CommentWrittenListener
 {
+    use AchievementTrait;
     /**
      * Create the event listener.
      *
@@ -31,9 +33,7 @@ class CommentWrittenListener
      */
     public function handle(CommentWritten $event)
     {
-        Log::debug($event->comment);
         $user = Auth::user();
-        Log::debug(Auth::user());
         $comments = count($user->comments);
         $achievement = Achievement::where('type', 'comment')
             ->where('number', $comments)
@@ -63,7 +63,6 @@ class CommentWrittenListener
             }
 
         }
-        Log::debug($comments);
 
     }
 }

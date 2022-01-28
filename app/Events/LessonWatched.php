@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Lesson;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class LessonWatched
 {
@@ -23,5 +24,7 @@ class LessonWatched
     {
         $this->lesson = $lesson;
         $this->user = $user;
+        Log::debug($this->lesson);
+
     }
 }

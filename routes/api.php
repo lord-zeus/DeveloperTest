@@ -44,6 +44,8 @@ Route::group(['prefix'=> '/v1', 'middleware' =>  'auth:api'], function () {
 
     Route::get('/lessons', [LessonController::class, 'index']);
     Route::post('/lessons', [LessonController::class, 'store']);
+    Route::get('/lessons/assign/{lesson_id}/{user_id}', [LessonController::class, 'assignLesson']);
+    Route::get('/lessons/watch/{lesson_id}', [LessonController::class, 'watchLesson']);
 
     //Comments
 
