@@ -9,4 +9,8 @@ class Badge extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'number_achievements'];
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

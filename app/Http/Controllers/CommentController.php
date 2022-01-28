@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentWritten;
 use App\Models\Comment;
 use App\Traits\APIResponse;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class CommentController extends Controller
         $user_id = Auth::id();
         $request->merge(['user_id' => $user_id]);
         $comment = Comment::create($request->all());
+        CommentWritten::dispatch($comment);
         return $this->successResponse($comment);
     }
 }

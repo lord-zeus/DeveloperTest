@@ -26,7 +26,7 @@ class AchievementController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'name' => 'required|unique:achievements',
-            'number' => 'required|unique:achievements',
+            'number' => 'required',
             'type' => 'required|in:comment,lesson',
         ]);
         $achievement = Achievement::create($request->all());

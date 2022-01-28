@@ -52,6 +52,14 @@ class User extends Authenticatable
         return $this->orWhere('email', $username)->first();
     }
 
+    public function achievements(){
+        return $this->belongsToMany(Achievement::class);
+    }
+
+    public function badges(){
+        return $this->belongsToMany(Badge::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);

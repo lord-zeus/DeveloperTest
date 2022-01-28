@@ -5,6 +5,7 @@ namespace App\Events;
 use App\Models\Comment;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class CommentWritten
 {
