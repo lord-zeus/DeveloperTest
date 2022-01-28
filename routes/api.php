@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,11 @@ Route::group(['prefix'=> '/v1', 'middleware' =>  'auth:api'], function () {
 
     Route::get('/lessons', [LessonController::class, 'index']);
     Route::post('/lessons', [LessonController::class, 'store']);
+
+    //Comments
+
+    Route::get('/comments', [CommentController::class, 'index']);
+    Route::post('/comments', [CommentController::class, 'store']);
 
 });
 
