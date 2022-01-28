@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Achievement extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'type'];
+    protected $fillable = ['name', 'type', 'number'];
 
     public function users(){
         return $this->belongsToMany(User::class);

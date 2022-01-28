@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BadgeController;
-use App\Http\Controllers\AchievementsController;
+use App\Http\Controllers\AchievementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,14 @@ Route::group(['prefix'=> '/v1'], function () {
 
 
 Route::group(['prefix'=> '/v1', 'middleware' =>  'auth:api'], function () {
+    //Badges
     Route::get('/badges', [BadgeController::class, 'index']);
     Route::post('/badges', [BadgeController::class, 'store']);
+
+    //Achievements
+
+    Route::get('/achievements', [AchievementController::class, 'index']);
+    Route::post('/achievements', [AchievementController::class, 'store']);
+
 });
 
