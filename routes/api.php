@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\LessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::group(['prefix'=> '/v1', 'middleware' =>  'auth:api'], function () {
 
     Route::get('/achievements', [AchievementController::class, 'index']);
     Route::post('/achievements', [AchievementController::class, 'store']);
+
+    //Lessons
+
+    Route::get('/lessons', [LessonController::class, 'index']);
+    Route::post('/lessons', [LessonController::class, 'store']);
 
 });
 
