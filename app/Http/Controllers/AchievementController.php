@@ -46,14 +46,19 @@ class AchievementController extends Controller
         if(empty($comment)){
             $all_achievement_comment = Achievement::where('type', 'comment')->orderBy('number')->first();
         }
+        else
+            $all_achievement_comment = Achievement::where('type', 'comment')->where('number', '>', $comment->number)->orderBy('number')->first();
+
         if(empty($lesson)){
             $all_achievement_lesson = Achievement::where('type', 'lesson')->orderBy('number')->first();
         }
-
-        $all_achievement_lesson = Achievement::where('type', 'lesson')->where('number', '>', $lesson->number)->orderBy('number')->first();
-        $all_achievement_comment = Achievement::where('type', 'comment')->where('number', '>', $comment->number)->orderBy('number')->first();
+        else
+            $all_achievement_lesson = Achievement::where('type', 'lesson')->where('number', '>', $lesson->number)->orderBy('number')->first();
 
         $user_badge = $user->badges->sortBy('number_achievements')->last();
+        if(empty($user_badge)){
+            $user_badge = Badge::orderBy('number_achievements')->first();
+        }
         $next = Badge::where('number_achievements', '>', $user_badge->number_achievements)->orderBy('number_achievements')->first();
         $final = [
             'unlocked_achievements' => $achievements->pluck('name'),
