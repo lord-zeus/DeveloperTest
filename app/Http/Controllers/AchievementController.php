@@ -60,7 +60,7 @@ class AchievementController extends Controller
             'next_available_achievements' => [$all_achievement_lesson->name, $all_achievement_comment->name],
             'current_badge' => $user_badge->name,
             'next_badge' => $next->name,
-            'remaining_to_unlock_next_badge' =>( (int)$next->number_achievements - (int)$user_badge->number_achievements)
+            'remaining_to_unlock_next_badge' =>( (int)$next->number_achievements - count($achievements))
         ];
         return $this->successResponse($final);
     }
