@@ -15,24 +15,23 @@ class CommentTest extends TestCase
      *
      * @return void
      */
-    public function auth_test()
+    public function test_example()
     {
         $user = User::factory()->create();
-        $response = $this->post('/login', [
+        $response = $this->postJson('/login', [
             'email' => $user->email,
             'password' => 'password'
+        ])->assertJson([
+            'access_token' => true,
         ]);
-        $response->assertStatus(200)
-            ->assertJson([
-                'access_token' => true,
-            ]);
+
+//        $response1 = $this->withHeaders([
+//            'Authorization' => 'Bearer ' .$this->assertTrue($response['access_token']),
+//        ])->get('/api/v1/badges');
 
 
         $response = $this->get('/users/1/achievements');
 
         $response->assertStatus(200);
-    }
-    public function badges(){
-
     }
 }
