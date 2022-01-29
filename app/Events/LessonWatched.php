@@ -24,7 +24,6 @@ class LessonWatched
     {
         $this->lesson = $lesson;
         $this->user = $user;
-        Log::debug($this->lesson);
 
     }
 }
