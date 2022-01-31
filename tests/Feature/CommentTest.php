@@ -18,18 +18,12 @@ class CommentTest extends TestCase
     public function test_example()
     {
         $user = User::factory()->create();
-        $response = $this->postJson('/login', [
+        $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'password'
-        ])->assertJson([
-            'access_token' => true,
-        ]);
-
-//        $response1 = $this->withHeaders([
-//            'Authorization' => 'Bearer ' .$this->assertTrue($response['access_token']),
-//        ])->get('/api/v1/badges');
-
-
+        ])->decodeResponseJson();
+        $access = json_decode($response->json);
+        Log::debug($access->access_token);
         $response = $this->get('/users/1/achievements');
 
         $response->assertStatus(200);
