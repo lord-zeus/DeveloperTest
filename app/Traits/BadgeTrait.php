@@ -13,8 +13,6 @@ trait BadgeTrait {
     public function achievements($achievement){
         $user = Auth::user();
         $user_achievement = $user->achievements;
-        Log::debug('acheive');
-        Log::debug($user_achievement);
         $achieve_ids = [];
         foreach ($user_achievement as $achieve){
             array_push($achieve_ids, $achieve->id);
