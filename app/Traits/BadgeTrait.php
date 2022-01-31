@@ -6,11 +6,23 @@ use App\Events\BadgeUnlocked;
 use App\Models\Badge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 trait BadgeTrait {
 
     public function achievements($achievement){
         $user = Auth::user();
+        $user_achievement = $user->achievements;
+        Log::debug('acheive');
+        Log::debug($user_achievement);
+        $achieve_ids = [];
+        foreach ($user_achievement as $achieve){
+            array_push($achieve_ids, $achieve->id);
+        }
+        if(in_array($achievement->id, $achieve_ids)){
+            Log::debug('achievemen alrady ne');
+            return;
+        }
         DB::table('achievement_user')->insert([
             'user_id' => $user->id,
             'achievement_id' => $achievement->id
@@ -27,7 +39,6 @@ trait BadgeTrait {
                 BadgeUnlocked::dispatch($badge->name, $user);
             }
         }
-        $user_achievement = $user->achievements;
         $badge = Badge::where('number_achievements', count($user_achievement))->first();
         if(!empty($badge)){
             DB::table('badge_user')->insert([

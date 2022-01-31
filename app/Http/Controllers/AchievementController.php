@@ -58,6 +58,12 @@ class AchievementController extends Controller
         $user_badge = $user->badges->sortBy('number_achievements')->last();
         if(empty($user_badge)){
             $user_badge = Badge::orderBy('number_achievements')->first();
+            Log::debug('new user');
+            Log::debug($user_badge);
+            DB::table('badge_user')->insert([
+                'badge_id' => $user_badge->id,
+                'user_id' => $user->id
+            ]);
         }
         $next = Badge::where('number_achievements', '>', $user_badge->number_achievements)->orderBy('number_achievements')->first();
         $final = [

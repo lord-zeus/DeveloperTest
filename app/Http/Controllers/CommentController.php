@@ -10,6 +10,7 @@ use App\Traits\AchievementTrait;
 use App\Traits\APIResponse;
 use App\Traits\BadgeTrait;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -36,6 +37,6 @@ class CommentController extends Controller
         if(!empty($achievement)){
             $this->achievements($achievement);
         }
-        return $this->successResponse($comment);
+        return $this->successResponse($comment, Response::HTTP_CREATED);
     }
 }
